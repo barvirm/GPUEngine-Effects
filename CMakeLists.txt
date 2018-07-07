@@ -28,6 +28,10 @@ endif()
 
 
 # List of CPP (source) library files.
+set(${PROJECT_NAME}_COMMON_HDR
+    src/VisualizationTechnique.h
+)
+
 set(${PROJECT_NAME}_GEOMETRY_SRC 
     src/geometry/Line.cpp
     src/geometry/Sphere.cpp
@@ -42,16 +46,26 @@ set(${PROJECT_NAME}_GEOMETRY_HDR
 
 set(${PROJECT_NAME}_LASER_SRC
     src/laser/Laser.cpp
+    src/laser/LaserVT.cpp
 )
 
 set(${PROJECT_NAME}_LASER_HDR
     src/laser/Laser.h
+    src/laser/LaserVT.h
 )
 
-set(${PROJECT_NAME}_HEADERS ${${PROJECT_NAME}_GEOMETRY_HDR} ${${PROJECT_NAME}_LASER_HDR})
-set(${PROJECT_NAME}_SOURCES ${${PROJECT_NAME}_GEOMETRY_SRC} ${${PROJECT_NAME}_LASER_SRC})
+set(${PROJECT_NAME}_HEADERS 
+    ${${PROJECT_NAME}_GEOMETRY_HDR} 
+    ${${PROJECT_NAME}_LASER_HDR} 
+    ${${PROJECT_NAME}_COMMON_HDR}
+)
 
-find_package(GPUEngine REQUIRED COMPONENT geSG)
+set(${PROJECT_NAME}_SOURCES 
+    ${${PROJECT_NAME}_GEOMETRY_SRC} 
+    ${${PROJECT_NAME}_LASER_SRC}
+)
+
+find_package(GPUEngine REQUIRED)
 find_package(glm REQUIRED)
 
 # You can add an external dependency using the find_package() function call
@@ -85,8 +99,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSI
 # The $<INSTALL_PREFIX> generator expression is useful to ensure to create 
 # relocatable configuration files, see https://cmake.org/cmake/help/latest/manual/cmake-packages.7.html#creating-relocatable-packages
 target_include_directories(${PROJECT_NAME} PUBLIC 
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/src"
-    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>" # TODO ERROR nevim jak zpravit podivej se na cxx-export-library
+    "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>"
 )
 
 # If you used find_package() you need to use target_include_directories() and/or
@@ -100,6 +114,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 # Specify installation targets, typology and destination folders.
 install(FILES ${${PROJECT_NAME}_GEOMETRY_HDR} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/geometry)
+install(FILES ${${PROJECT_NAME}_COMMON_HDR} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 install(FILES ${${PROJECT_NAME}_LASER_HDR}    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/laser)
 
 install(TARGETS ${PROJECT_NAME} EXPORT  ${PROJECT_NAME}Targets

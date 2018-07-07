@@ -14,9 +14,9 @@ namespace msg {
         inline void setEnd(std::shared_ptr<glm::vec3> &e) { end = e; }
         inline void setWidth(std::shared_ptr<float> &w) { width = w; }
 
-        inline std::shared_ptr<glm::vec3> &getBegin() { return begin; }
-        inline std::shared_ptr<glm::vec3> &getEnd() { return end; }
-        inline std::shared_ptr<float> &getWidth() { return width; }
+        virtual inline std::shared_ptr<glm::vec3> &getBeginPtr() { return begin; }
+        virtual inline std::shared_ptr<glm::vec3> &getEndPtr() { return end; }
+        virtual inline std::shared_ptr<float> &getWidthPtr() { return width; }
 
     public: // const
         inline glm::vec3 getDirection() const { return glm::normalize(*end - *begin); }

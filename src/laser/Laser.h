@@ -1,6 +1,6 @@
 #pragma once
 
-#include <geometry/Line.h>
+#include "../geometry/Line.h"
 #include <memory>
 #include <glm/glm.hpp>
 
