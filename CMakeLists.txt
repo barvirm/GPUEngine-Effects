@@ -54,6 +54,7 @@ set(${PROJECT_NAME}_LASER_HDR
     src/laser/LaserVT.h
 )
 
+
 set(${PROJECT_NAME}_HEADERS 
     ${${PROJECT_NAME}_GEOMETRY_HDR} 
     ${${PROJECT_NAME}_LASER_HDR} 
@@ -65,7 +66,7 @@ set(${PROJECT_NAME}_SOURCES
     ${${PROJECT_NAME}_LASER_SRC}
 )
 
-find_package(GPUEngine REQUIRED)
+find_package(GPUEngine REQUIRED COMPONENT geGL geSG)
 find_package(glm REQUIRED)
 
 # You can add an external dependency using the find_package() function call
@@ -99,7 +100,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSI
 # The $<INSTALL_PREFIX> generator expression is useful to ensure to create 
 # relocatable configuration files, see https://cmake.org/cmake/help/latest/manual/cmake-packages.7.html#creating-relocatable-packages
 target_include_directories(${PROJECT_NAME} PUBLIC 
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>" # TODO ERROR nevim jak zpravit podivej se na cxx-export-library
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>"
     "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>"
 )
 
