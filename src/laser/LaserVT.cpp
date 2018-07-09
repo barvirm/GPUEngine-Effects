@@ -1,6 +1,7 @@
 #include "LaserVT.h"
 #include <iostream>
 #include <geGL/geGL.h>
+#include <geUtil/OrbitCamera.h>
 #include <vector>
 #include <glm/vec3.hpp>
 #include <glm/mat4x4.hpp>
@@ -33,25 +34,45 @@ void msg::LaserVT::draw() {
 void msg::LaserVT::update() {
     //std::cout << "LaserVT update()" << std::endl;
     _VAO = new ge::gl::VertexArray(gl->getFunctionTable());
-    
-    std::vector<float> vertices;
-    std::for_each(lasers->begin(), lasers->end(), 
-        [&vertices](const std::shared_ptr<msg::Laser> &l) {
+    auto cameraPosition = glm::vec3(glm::inverse(orbitCamera->getView())[3]);
+
+    std::vector<glm::vec3> vertices;
+    std::for_each(lasers->begin(), lasers->end(),
+        [&vertices, &cameraPosition](const std::shared_ptr<msg::Laser> &l) {
             glm::vec3 b(l->getBegin());
             glm::vec3 e(l->getEnd());
 
-            vertices.emplace_back(b.x);
-            vertices.emplace_back(b.y);
-            vertices.emplace_back(b.z);
+            float bl = glm::length(b - cameraPosition);
+            float el = glm::length(e - cameraPosition);
 
-            vertices.emplace_back(e.x);
-            vertices.emplace_back(e.y);
-            vertices.emplace_back(e.z);
+            if ( bl > el ) {
+                vertices.emplace_back(l->getBegin());
+                vertices.emplace_back(l->getEnd());
+            }
+            else {
+                vertices.emplace_back(l->getBegin());
+                vertices.emplace_back(l->getEnd());
+            }
+
         }
     );
+    /*
+    std::vector<float> vertices;
+    std::for_each(lasers->begin(), lasers->end(), 
+        [&vertices, &cameraPosition](const std::shared_ptr<msg::Laser> &l) {
+            glm::vec3 b(l->getBegin());
+            glm::vec3 e(l->getEnd());
+
+            float bl = glm::length(b - cameraPosition);
+            float el = glm::length(b - cameraPosition);
+
+
+        }
+    );
+        */
     
     _VAO->addAttrib(
-        std::make_shared<ge::gl::Buffer>(gl->getFunctionTable(), sizeof(float) * vertices.size(), vertices.data()),
+        std::make_shared<ge::gl::Buffer>(gl->getFunctionTable(), sizeof(glm::vec3) * vertices.size(), vertices.data()),
         static_cast<GLuint>(0),
         3,
         GL_FLOAT,

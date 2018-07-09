@@ -4,6 +4,8 @@
 
 #include <memory>
 #include <vector>
+#include <glm/vec3.hpp>
+
 
 
 namespace ge {
@@ -12,6 +14,9 @@ namespace ge {
         class Context;
         class Program;
         class Texture;
+    }
+    namespace util {
+        class OrbitCamera;
     }
 }
 
@@ -31,8 +36,9 @@ namespace msg {
 
             std::shared_ptr<std::vector<std::shared_ptr<msg::Laser>>> lasers;
             std::shared_ptr<ge::gl::Texture> texture;
+            std::shared_ptr<ge::util::OrbitCamera> orbitCamera;
         private:
-            std::vector<float> _vertices;
+            std::vector<glm::vec3> _vertices;
             ge::gl::VertexArray *_VAO;
     };
 }
