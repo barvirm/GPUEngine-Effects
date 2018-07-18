@@ -16,14 +16,20 @@ void msg::LaserVT::draw() {
     gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     gl->glDepthMask(GL_FALSE);
 
-    glm::mat4 model(1);
-    //program->setMatrix4fv("modelMatrix", glm::value_ptr(model));
-
+    std::vector<glm::mat4> matrices;
+    std::for_each(lasers->begin(), lasers->end(), 
+        [&matrices](const std::shared_ptr<const msg::Laser> &l) { 
+            matrices.emplace_back(l->getMatrix()); 
+        }
+    );
+    ge::gl::Buffer modelMatrices(gl->getFunctionTable(), sizeof(glm::mat4) * matrices.size(), matrices.data());
+    modelMatrices.bindBase(GL_SHADER_STORAGE_BUFFER, 0);
+    
     program->use();
     texture->bind(0);
     _VAO->bind();
 
-    gl->glDrawArrays(GL_LINES, 0, 2);
+    gl->glDrawElements(GL_LINES, lasers->size()*2, GL_UNSIGNED_INT, 0);
 
     delete _VAO;
     gl->glDepthMask(GL_TRUE);
@@ -37,6 +43,8 @@ void msg::LaserVT::update() {
     auto cameraPosition = glm::vec3(glm::inverse(orbitCamera->getView())[3]);
 
     std::vector<glm::vec3> vertices;
+    std::vector<unsigned> index;
+    for(unsigned i = 0; i < lasers->size()*2; i++) { index.emplace_back(i);}
     std::for_each(lasers->begin(), lasers->end(),
         [&vertices, &cameraPosition](const std::shared_ptr<msg::Laser> &l) {
             glm::vec3 b(l->getBegin());
@@ -56,26 +64,9 @@ void msg::LaserVT::update() {
 
         }
     );
-    /*
-    std::vector<float> vertices;
-    std::for_each(lasers->begin(), lasers->end(), 
-        [&vertices, &cameraPosition](const std::shared_ptr<msg::Laser> &l) {
-            glm::vec3 b(l->getBegin());
-            glm::vec3 e(l->getEnd());
-
-            float bl = glm::length(b - cameraPosition);
-            float el = glm::length(b - cameraPosition);
-
-
-        }
-    );
-        */
-    
-    _VAO->addAttrib(
-        std::make_shared<ge::gl::Buffer>(gl->getFunctionTable(), sizeof(glm::vec3) * vertices.size(), vertices.data()),
-        static_cast<GLuint>(0),
-        3,
-        GL_FLOAT,
-        (GLsizei) 0
-    );
+    auto FT = gl->getFunctionTable();
+    auto vert(std::make_shared<ge::gl::Buffer>(FT, sizeof(glm::vec3) * vertices.size(), vertices.data()));
+    auto ind(std::make_shared<ge::gl::Buffer>(FT, sizeof(unsigned) * index.size(), index.data()));
+    _VAO->addElementBuffer(ind);
+    _VAO->addAttrib(vert, 0, 3, GL_FLOAT, 0);
 }

@@ -18,6 +18,7 @@ namespace msg {
         inline glm::vec3 getEnd() const { return *end; }
         inline float getWidth() const { return *width; }
         inline glm::vec4 getColor() const { return *color; }
+        inline glm::mat4 getMatrix() const { return *matrix; }
 
         inline float getLength() const  { return glm::distance(*end, *begin); }
         inline glm::vec3 getDirection() const { return glm::normalize(*end - *begin); }
