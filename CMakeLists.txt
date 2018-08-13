@@ -58,16 +58,30 @@ set(${PROJECT_NAME}_LASER_HDR
     src/laser/LaserVT.h
 )
 
+set(${PROJECT_NAME}_SHIELD_HDR
+    src/shield/Intersection.h
+    src/shield/PulseWave.h
+    src/shield/Shield.h
+    src/shield/ShieldVT.h
+)
+
+set(${PROJECT_NAME}_SHIELD_SRC
+    src/shield/Shield.cpp
+    src/shield/ShieldVT.cpp
+)
+
 
 set(${PROJECT_NAME}_HEADERS 
     ${${PROJECT_NAME}_GEOMETRY_HDR} 
     ${${PROJECT_NAME}_LASER_HDR} 
     ${${PROJECT_NAME}_COMMON_HDR}
+    ${${PROJECT_NAME}_SHIELD_HDR}
 )
 
 set(${PROJECT_NAME}_SOURCES 
     ${${PROJECT_NAME}_GEOMETRY_SRC} 
     ${${PROJECT_NAME}_LASER_SRC}
+    ${${PROJECT_NAME}_SHIELD_SRC}
 )
 
 find_package(GPUEngine REQUIRED COMPONENT geGL geSG)
@@ -121,6 +135,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 install(FILES ${${PROJECT_NAME}_GEOMETRY_HDR} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/geometry)
 install(FILES ${${PROJECT_NAME}_COMMON_HDR} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 install(FILES ${${PROJECT_NAME}_LASER_HDR}    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/laser)
+install(FILES ${${PROJECT_NAME}_SHIELD_HDR}    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/shield)
 
 install(TARGETS ${PROJECT_NAME} EXPORT  ${PROJECT_NAME}Targets
         LIBRARY       DESTINATION ${CMAKE_INSTALL_LIBDIR}                            
