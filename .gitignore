@@ -6,4 +6,6 @@ install_manifest.txt
 lib/
 out
 removeInstall.sh
+build
+.vscode
 
