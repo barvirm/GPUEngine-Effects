@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <math.h>
 
 namespace msg {
     class SphereFactory {
