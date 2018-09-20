@@ -2,7 +2,7 @@
 
 #include "../geometry/Sphere.h"
 #include "../geometry/SphereFactory.h"
-#include <glm/mat4x4.hpp> // TODO fwd dec
+#include <glm/fwd.hpp>
 #include <vector>
 #include <memory>
 

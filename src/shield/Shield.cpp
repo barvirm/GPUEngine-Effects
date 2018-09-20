@@ -3,6 +3,7 @@
 #include <shield/PulseWave.h>
 #include <iostream>
 #include <algorithm>
+#include <glm/mat4x4.hpp>
 
 msg::Shield::Shield(glm::vec3 origin, float r, std::shared_ptr<glm::mat4> matrix = std::make_shared<glm::mat4>(1.0)) :
     msg::Sphere(origin, r),
