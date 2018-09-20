@@ -12,7 +12,7 @@ namespace msg {
                 t(std::make_shared<float>(0.0f))
             {}
 
-            inline std::shared_ptr<float> time() { return t; }
+            inline std::shared_ptr<float> &time() { return t; }
             inline bool deleteFlag() { return (*t == 1.0f); }
 
         public: // const

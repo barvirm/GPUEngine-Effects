@@ -12,5 +12,5 @@ msg::Shield::Shield(glm::vec3 origin, float r, std::shared_ptr<glm::mat4> matrix
     {}
 
 
-void msg::Shield::addIntersecion(msg::Intersection &i) { intersections->emplace_back(i); }
+void msg::Shield::addIntersection(msg::Intersection &i) { intersections->emplace_back(i); }
 void msg::Shield::addPulseWave(msg::PulseWave &pw) { pulseWaves->emplace_back(pw); }

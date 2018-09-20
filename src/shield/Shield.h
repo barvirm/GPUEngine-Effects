@@ -17,7 +17,7 @@ namespace msg {
             Shield(glm::vec3 origin, float r, std::shared_ptr<glm::mat4> matrix);
 
             inline glm::mat4 getMatrix() { return *matrix; }
-            void addIntersecion(msg::Intersection &i); 
+            void addIntersection(msg::Intersection &i); 
             void addPulseWave(msg::PulseWave &pw);     
 
             std::shared_ptr<std::vector<msg::Intersection>> intersections;
