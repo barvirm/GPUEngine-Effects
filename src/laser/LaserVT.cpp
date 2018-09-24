@@ -29,7 +29,7 @@ void msg::LaserVT::draw() {
     texture->bind(0);
     _VAO->bind();
 
-    gl->glDrawElements(GL_LINES, lasers->size()*2, GL_UNSIGNED_INT, 0);
+    gl->glDrawArrays(GL_LINES, 0, lasers->size()*2);
 
     delete _VAO;
     gl->glDepthMask(GL_TRUE);
@@ -43,30 +43,23 @@ void msg::LaserVT::update() {
     auto cameraPosition = glm::vec3(glm::inverse(orbitCamera->getView())[3]);
 
     std::vector<glm::vec3> vertices;
-    std::vector<unsigned> index;
-    for(unsigned i = 0; i < lasers->size()*2; i++) { index.emplace_back(i);}
-    std::for_each(lasers->begin(), lasers->end(),
-        [&vertices, &cameraPosition](const std::shared_ptr<msg::Laser> &l) {
-            glm::vec3 b(l->getBegin());
-            glm::vec3 e(l->getEnd());
+    for(const std::shared_ptr<const msg::Laser> &l : *lasers) {
+        glm::vec3 b(l->getBegin());
+        glm::vec3 e(l->getEnd());
 
-            float bl = glm::length(b - cameraPosition);
-            float el = glm::length(e - cameraPosition);
+        float bl = glm::length(b - cameraPosition);
+        float el = glm::length(e - cameraPosition);
 
-            if ( bl > el ) {
-                vertices.emplace_back(l->getBegin());
-                vertices.emplace_back(l->getEnd());
-            }
-            else {
-                vertices.emplace_back(l->getBegin());
-                vertices.emplace_back(l->getEnd());
-            }
-
+        if (bl > el) {
+            vertices.emplace_back(l->getBegin());
+            vertices.emplace_back(l->getEnd());
         }
-    );
+        else {
+            vertices.emplace_back(l->getEnd());
+            vertices.emplace_back(l->getBegin());
+        }
+    }
     auto FT = gl->getFunctionTable();
     auto vert(std::make_shared<ge::gl::Buffer>(FT, sizeof(glm::vec3) * vertices.size(), vertices.data()));
-    auto ind(std::make_shared<ge::gl::Buffer>(FT, sizeof(unsigned) * index.size(), index.data()));
-    _VAO->addElementBuffer(ind);
     _VAO->addAttrib(vert, 0, 3, GL_FLOAT, 0);
 }
