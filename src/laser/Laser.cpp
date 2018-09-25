@@ -1,4 +1,4 @@
-#include "Effects/laser/Laser.h"
+#include "Laser.h"
 
 msg::Laser::Laser(glm::vec3 begin, glm::vec3 end, glm::vec4 color, float width) {
     this->begin = std::make_shared<glm::vec3>(begin);
