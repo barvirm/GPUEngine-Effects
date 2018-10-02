@@ -10,23 +10,16 @@ namespace msg {
         Laser() = default;
         Laser(glm::vec3 begin, glm::vec3 end, glm::vec4 color, float width);
 
-        inline std::shared_ptr<glm::mat4> &getMatrix() { return matrix; }
-        inline std::shared_ptr<glm::vec4> &getColor() { return color; }
+        inline std::shared_ptr<glm::mat4> &matrix() { return _matrix; }
+        inline std::shared_ptr<glm::vec4> &color() { return _color; }
 
     public: // const
-        inline glm::vec3 getBegin() const { return *begin; }
-        inline glm::vec3 getEnd() const { return *end; }
-        inline float getWidth() const { return *width; }
-        inline glm::vec4 getColor() const { return *color; }
-        inline glm::mat4 getMatrix() const { return *matrix; }
-
-        inline float getLength() const  { return glm::distance(*end, *begin); }
-        inline glm::vec3 getDirection() const { return glm::normalize(*end - *begin); }
- 
+        inline glm::vec4 color() const { return *_color; }
+        inline glm::mat4 matrix() const { return *_matrix; }
 
     protected:
-        std::shared_ptr<glm::vec4> color;
-        std::shared_ptr<glm::mat4> matrix;
+        std::shared_ptr<glm::vec4> _color;
+        std::shared_ptr<glm::mat4> _matrix;
     };
 }
 

@@ -10,24 +10,24 @@ namespace msg {
         Line() = default;
         Line(glm::vec3 start, glm::vec3 end, float width = 1);
 
-        inline void setBegin(std::shared_ptr<glm::vec3> &b) { begin = b; }
-        inline void setEnd(std::shared_ptr<glm::vec3> &e) { end = e; }
-        inline void setWidth(std::shared_ptr<float> &w) { width = w; }
+        inline void begin(std::shared_ptr<glm::vec3> &b) { _begin = b; }
+        inline void end(std::shared_ptr<glm::vec3> &e) { _end = e; }
+        inline void setWidth(std::shared_ptr<float> &w) { _width = w; }
 
-        virtual inline std::shared_ptr<glm::vec3> &getBeginPtr() { return begin; }
-        virtual inline std::shared_ptr<glm::vec3> &getEndPtr() { return end; }
-        virtual inline std::shared_ptr<float> &getWidthPtr() { return width; }
+        virtual inline std::shared_ptr<glm::vec3> &beginPtr() { return _begin; }
+        virtual inline std::shared_ptr<glm::vec3> &endPtr() { return _end; }
+        virtual inline std::shared_ptr<float> &widthPtr() { return _width; }
 
     public: // const
-        inline glm::vec3 getDirection() const { return glm::normalize(*end - *begin); }
-        inline virtual float getLength() const { return glm::distance(*begin, *end); }
-        inline glm::vec3 getBegin() const { return *begin; }
-        inline glm::vec3 getEnd() const { return *end; }
-        inline float getWidth() const { return *width; }
+        inline glm::vec3 direction() const { return glm::normalize(*_end - *_begin); }
+        inline float length() const { return glm::distance(*_begin, *_end); }
+        inline glm::vec3 begin() const { return *_begin; }
+        inline glm::vec3 end() const { return *_end; }
+        inline float width() const { return *_width; }
 
     protected:
-        std::shared_ptr<glm::vec3> begin;
-        std::shared_ptr<glm::vec3> end;
-        std::shared_ptr<float> width;
+        std::shared_ptr<glm::vec3> _begin;
+        std::shared_ptr<glm::vec3> _end;
+        std::shared_ptr<float> _width;
     };
 }
