@@ -12,7 +12,7 @@
 #include "Laser.h"
 
 void msg::LaserVT::draw() {
-    std::cout << "LaserVT draw()" << std::endl;
+    //std::cout << "LaserVT draw()" << std::endl;
     gl->glEnable(GL_BLEND);
     gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     gl->glDepthMask(GL_FALSE);
@@ -34,7 +34,6 @@ void msg::LaserVT::draw() {
     gl->glDepthMask(GL_TRUE);
     gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     gl->glDisable(GL_BLEND);
-    std::cout << "LVT End" << std::endl;
 }
 
 void msg::LaserVT::update() {
