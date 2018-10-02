@@ -27,7 +27,7 @@ namespace msg {
 }
 
 namespace msg {
-    class LaserVT : public eff::msg::VisualizationTechnique {
+    class LaserVT : public VisualizationTechnique {
         public:
             LaserVT() = default;
             ~LaserVT() = default;

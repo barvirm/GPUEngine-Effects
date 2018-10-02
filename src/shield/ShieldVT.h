@@ -18,7 +18,7 @@ namespace msg {
 }
 
 namespace msg {
-    class ShieldVT : public eff::msg::VisualizationTechnique {
+    class ShieldVT : public VisualizationTechnique {
 
         public:
             void init();
