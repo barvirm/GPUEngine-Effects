@@ -7,6 +7,8 @@
 #include <numeric>
 #include <geGL/geGL.h>
 
+#include <geUtil/OrbitCamera.h>
+#include <geUtil/PerspectiveCamera.h>
 
 void msg::ShieldVT::draw() {
     //std::cout << "ShieldVT draw" << std::endl;
@@ -73,6 +75,9 @@ void msg::ShieldVT::draw() {
 
 void msg::ShieldVT::update() {
     //std::cout << "ShieldVT update" << std::endl;
+    program->setMatrix4fv("projectionMatrix", glm::value_ptr(perspectiveCamera->getProjection()));
+    program->setMatrix4fv("viewMatrix", glm::value_ptr(orbitCamera->getView()));
+    program->set1f("time", *time);
 }
 
 void msg::ShieldVT::init() {
