@@ -1,7 +1,7 @@
-#include "ShieldVT.h"
-#include "Shield.h"
-#include "PulseWave.h"
-#include "Intersection.h"
+#include <Effects/shield/ShieldVT.h>
+#include <Effects/shield/Shield.h>
+#include <Effects/shield/PulseWave.h>
+#include <Effects/shield/Intersection.h>
 #include <iostream>
 #include <algorithm>
 #include <numeric>

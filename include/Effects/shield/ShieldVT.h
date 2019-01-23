@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "../VisualizationTechnique.h"
+#include <Effects/VisualizationTechnique.h>
 #include <memory>
 #include <vector>
 

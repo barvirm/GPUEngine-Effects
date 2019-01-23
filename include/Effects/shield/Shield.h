@@ -1,7 +1,7 @@
 #pragma once 
 
-#include "../geometry/Sphere.h"
-#include "../geometry/SphereFactory.h"
+#include <Effects/geometry/Sphere.h>
+#include <Effects/geometry/SphereFactory.h>
 #include <glm/fwd.hpp>
 #include <vector>
 #include <memory>

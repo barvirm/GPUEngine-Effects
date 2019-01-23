@@ -1,6 +1,6 @@
-#include <shield/Shield.h>
-#include <shield/Intersection.h>
-#include <shield/PulseWave.h>
+#include <Effects/shield/Shield.h>
+#include <Effects/shield/Intersection.h>
+#include <Effects/shield/PulseWave.h>
 #include <iostream>
 #include <algorithm>
 #include <glm/mat4x4.hpp>

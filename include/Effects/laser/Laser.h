@@ -1,11 +1,12 @@
 #pragma once
 
-#include "../geometry/Line.h"
+#include <Effects/geometry/Line.h>
 #include <memory>
 #include <glm/glm.hpp>
+#include <Effects/Effects_export.h>
 
 namespace msg {
-    class Laser : public msg::Line { 
+    class EFFECTS_EXPORT Laser : public msg::Line {
     public:
         Laser() = default;
         Laser(glm::vec3 begin, glm::vec3 end, glm::vec4 color, float width);

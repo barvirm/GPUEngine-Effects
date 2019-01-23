@@ -1,4 +1,4 @@
-#include "LaserVT.h"
+#include <Effects/laser/LaserVT.h>
 #include <iostream>
 #include <geGL/geGL.h>
 #include <geUtil/OrbitCamera.h>
@@ -9,7 +9,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/matrix.hpp>
 #include <algorithm>
-#include "Laser.h"
+#include <Effects/laser/Laser.h>
 
 void msg::LaserVT::draw() {
     //std::cout << "LaserVT draw()" << std::endl;
@@ -28,7 +28,7 @@ void msg::LaserVT::draw() {
     texture->bind(0);
     _VAO->bind();
 
-    gl->glDrawArrays(GL_LINES, 0, lasers->size()*2);
+    gl->glDrawArrays(GL_LINES, 0,static_cast<GLsizei>(lasers->size()*2));
 
     delete _VAO;
     gl->glDepthMask(GL_TRUE);
