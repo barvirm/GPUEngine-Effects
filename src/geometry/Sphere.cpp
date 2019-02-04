@@ -1,4 +1,4 @@
-#include <Effects/geometry/sphere.h>
+#include <Effects/geometry/Sphere.h>
 
 msg::Sphere::Sphere(glm::vec3 origin, float r) {
     center=origin;
