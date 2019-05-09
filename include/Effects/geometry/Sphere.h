@@ -3,9 +3,10 @@
 
 #include <geSG/BoundingSphere.h>
 #include <glm/vec3.hpp>
+#include <Effects/Effects_export.h>
 
 namespace msg {
-    class Sphere : public ge::sg::BoundingSphere {
+    class EFFECTS_EXPORT Sphere : public ge::sg::BoundingSphere {
         public:
 
             Sphere() = default;

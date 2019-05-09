@@ -2,9 +2,10 @@
 
 #include <memory>
 #include <glm/vec3.hpp>
+#include <Effects/Effects_export.h>
 
 namespace msg {
-    class PulseWave {
+    class EFFECTS_EXPORT PulseWave {
         public:
             explicit PulseWave(float t, glm::vec3 o) :
                 t(std::make_shared<float>(t)),

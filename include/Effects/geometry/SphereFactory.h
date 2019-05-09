@@ -2,9 +2,10 @@
 
 #include <vector>
 #include <math.h>
+#include <Effects/Effects_export.h>
 
 namespace msg {
-    class SphereFactory {
+    class EFFECTS_EXPORT SphereFactory {
     public:
         static std::vector<float> create(const unsigned &grad) {
             std::vector<float> vertices;

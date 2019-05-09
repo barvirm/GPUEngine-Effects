@@ -3,6 +3,7 @@
 #include <Effects/VisualizationTechnique.h>
 #include <memory>
 #include <vector>
+#include <Effects/Effects_export.h>
 
 namespace ge {
     namespace gl {
@@ -22,7 +23,7 @@ namespace msg {
 }
 
 namespace msg {
-    class ShieldVT : public VisualizationTechnique {
+    class EFFECTS_EXPORT ShieldVT : public VisualizationTechnique {
 
         public:
             void init();
@@ -40,5 +41,6 @@ namespace msg {
             std::vector<float> _sphereVertex;
         private:
             std::shared_ptr<ge::gl::VertexArray> _VAO;
+            std::shared_ptr<ge::gl::Buffer> vb;
     };
 }

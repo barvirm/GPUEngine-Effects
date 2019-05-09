@@ -5,6 +5,7 @@
 #include <glm/fwd.hpp>
 #include <vector>
 #include <memory>
+#include <Effects/Effects_export.h>
 
 namespace msg {
     class PulseWave;
@@ -12,7 +13,7 @@ namespace msg {
 }
 
 namespace msg {
-    class Shield : public msg::Sphere {
+    class EFFECTS_EXPORT Shield : public msg::Sphere {
         public:
             Shield(glm::vec3 origin, float r, std::shared_ptr<glm::mat4> matrix);
 

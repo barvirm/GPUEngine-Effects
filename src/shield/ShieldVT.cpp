@@ -11,7 +11,7 @@
 #include <geUtil/PerspectiveCamera.h>
 
 void msg::ShieldVT::draw() {
-    //std::cout << "ShieldVT draw" << std::endl;
+    // std::cout << "ShieldVT draw" << std::endl;
     gl->glEnable(GL_BLEND);
     gl->glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     gl->glDepthMask(GL_FALSE);
@@ -85,6 +85,7 @@ void msg::ShieldVT::init() {
     auto FT = gl->getFunctionTable();
     _VAO = std::make_shared<ge::gl::VertexArray>(FT);
     _sphereVertex = SphereFactory::create(20);
-    auto vert(std::make_shared<ge::gl::Buffer>(FT, sizeof(float) * _sphereVertex.size(), _sphereVertex.data()));
-    _VAO->addAttrib(vert, static_cast<GLuint>(0), 3, GL_FLOAT);
+    //auto vert(std::make_shared<ge::gl::Buffer>(FT, sizeof(float) * _sphereVertex.size(), _sphereVertex.data()));
+    vb = std::make_shared<ge::gl::Buffer>(FT, sizeof(float) * _sphereVertex.size(), _sphereVertex.data());
+    _VAO->addAttrib(vb, static_cast<GLuint>(0), 3, GL_FLOAT);
 }

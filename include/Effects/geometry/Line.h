@@ -3,9 +3,10 @@
 #include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>
 #include <memory>
+#include <Effects/Effects_export.h>
 
 namespace msg {
-    class Line {
+    class EFFECTS_EXPORT Line {
     public:
         Line() = default;
         Line(glm::vec3 start, glm::vec3 end, float width = 1);

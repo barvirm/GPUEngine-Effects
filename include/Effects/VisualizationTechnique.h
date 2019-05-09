@@ -1,16 +1,8 @@
 #pragma once
-
-namespace ge {
-    namespace sg {
-        class MatrixTransformation;
-        class Material;
-        class Mesh;
-    }
-}
-
+#include <Effects/Effects_export.h>
 
 namespace msg {
-    class VisualizationTechnique {
+    class EFFECTS_EXPORT VisualizationTechnique {
     public:
         virtual ~VisualizationTechnique() = default;
 

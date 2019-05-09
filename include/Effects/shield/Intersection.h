@@ -3,9 +3,10 @@
 #include <glm/vec3.hpp>
 #include <chrono>
 #include <memory>
+#include <Effects/Effects_export.h>
 
 namespace msg {
-    class Intersection {
+    class EFFECTS_EXPORT Intersection {
         public:
             explicit Intersection(glm::vec3 p) :
                 point(p),

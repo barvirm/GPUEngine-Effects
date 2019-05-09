@@ -1,6 +1,6 @@
 #find dependencies
 FIND_PACKAGE(glm)
-FIND_PACKAGE(GPUEngine REQUIRED geGL geSG)
+FIND_PACKAGE(GPUEngine REQUIRED COMPONENTS geGL geSG geUtil)
 
 #Setup HeaderPath
 SET(HEADER_PATH ${CMAKE_HOME_DIRECTORY}/include/Effects)
@@ -35,26 +35,30 @@ ADD_LIBRARY(${PROJECT_NAME}
 )
 
 #Link dependencies
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} geSG geGL geUtil glm)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} geGL geSG geUtil glm)
 
 #Generate export header
-generate_export_header(${PROJECT_NAME})
+generate_export_header(${PROJECT_NAME}) # jenom export.h
 FILE(COPY ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_export.h DESTINATION ${HEADER_PATH})
 
 #Setting Version
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES VERSION ${${PROJECT_NAME}_VERSION})
 
 #Include directory same interface for Build and Install
+# pridate do includu vygenerovany export, jde se tak vyhnout copy
+# pridat i do install
 target_include_directories(${PROJECT_NAME} PUBLIC 
 		"$<BUILD_INTERFACE:${CMAKE_HOME_DIRECTORY}/include>"
 		"$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>"
 )
 
 #Install target
+# install directories
 INSTALL(FILES ${COMMON_HDR}   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 INSTALL(FILES ${GEOMETRY_HDR} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/geometry)
 INSTALL(FILES ${SHIELD_HDR}   DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/shield)
 INSTALL(FILES ${LASER_HDR}    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/laser)
+
 
 #Generate Targets
 INSTALL(TARGETS ${PROJECT_NAME} EXPORT  ${PROJECT_NAME}Targets

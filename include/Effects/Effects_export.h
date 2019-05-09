@@ -9,20 +9,20 @@
 #  ifndef EFFECTS_EXPORT
 #    ifdef Effects_EXPORTS
         /* We are building this library */
-#      define EFFECTS_EXPORT __declspec(dllexport)
+#      define EFFECTS_EXPORT __attribute__((visibility("default")))
 #    else
         /* We are using this library */
-#      define EFFECTS_EXPORT __declspec(dllimport)
+#      define EFFECTS_EXPORT __attribute__((visibility("default")))
 #    endif
 #  endif
 
 #  ifndef EFFECTS_NO_EXPORT
-#    define EFFECTS_NO_EXPORT 
+#    define EFFECTS_NO_EXPORT __attribute__((visibility("hidden")))
 #  endif
 #endif
 
 #ifndef EFFECTS_DEPRECATED
-#  define EFFECTS_DEPRECATED __declspec(deprecated)
+#  define EFFECTS_DEPRECATED __attribute__ ((__deprecated__))
 #endif
 
 #ifndef EFFECTS_DEPRECATED_EXPORT
